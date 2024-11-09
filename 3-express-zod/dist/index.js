@@ -24,9 +24,11 @@ exports.app.post('/sum', (req, res) => {
     res.status(200).json(answer);
 });
 exports.app.get('/sum', (req, res) => {
+    const a = Number(req.headers['a']);
+    const b = Number(req.headers['b']);
     const parsedResponse = sumInput.safeParse({
-        a: Number(req.headers['a']),
-        b: Number(req.headers['b']),
+        a: a,
+        b: b,
     });
     if (!parsedResponse.success) {
         res.status(411).json({
