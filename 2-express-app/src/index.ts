@@ -3,9 +3,9 @@ export const app = express();
 
 app.use(express.json());
 
-app.post('/', (req, res) => {
+app.post('/sum', (req: express.Request, res: express.Response) => {
     const { a, b } = req.body;
     const answer = a + b;
 
-    res.json('The sum is ' + answer);
+    res.status(200).json(answer);
 });

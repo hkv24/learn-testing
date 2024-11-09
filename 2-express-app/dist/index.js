@@ -7,8 +7,8 @@ exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 exports.app = (0, express_1.default)();
 exports.app.use(express_1.default.json());
-exports.app.post('/', (req, res) => {
+exports.app.post('/sum', (req, res) => {
     const { a, b } = req.body;
     const answer = a + b;
-    res.json('The sum is ' + answer);
+    res.status(200).json(answer);
 });
