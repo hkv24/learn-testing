@@ -46,3 +46,6 @@ app.get('/sum', (req, res) => {
 
     res.json(answer);
 })
+
+
+// Todo -> How to handle query parameters in tests?
