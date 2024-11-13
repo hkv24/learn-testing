@@ -10,7 +10,7 @@ console.log(prismaClient.sum.create);
 export const app = express();
 app.use(express.json());
 
-const sumInput =z.object({
+const sumInput = z.object({
     a: z.number(),
     b: z.number(),
 });
