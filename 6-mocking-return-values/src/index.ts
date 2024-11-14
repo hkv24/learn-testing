@@ -29,8 +29,8 @@ app.post('/sum', async (req, res) => {
     // If you r dependent on what the db returns u, then some exceptions can happen bcz. we r mocking out the whole thing
     // So we need to mock out the thing and also mock out the return value as well
         data: {
-            a: parsedResponse.data.a,
-            b: parsedResponse.data.b,
+            a: parsedResponse.data.b,
+            b: parsedResponse.data.a,
             result: result,
         }
     });
