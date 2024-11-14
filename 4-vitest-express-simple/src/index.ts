@@ -4,7 +4,11 @@ import { z } from "zod";
 export const app = express();
 app.use(express.json());
 
+<<<<<<< HEAD
 const sumInput =z.object({
+=======
+const sumInput = z.object({
+>>>>>>> main
     a: z.number(),
     b: z.number(),
 });
@@ -45,4 +49,8 @@ app.get('/sum', (req, res) => {
     const answer = parsedResponse.data.a + parsedResponse.data.b;
 
     res.json(answer);
+<<<<<<< HEAD
 })
+=======
+});
+>>>>>>> main

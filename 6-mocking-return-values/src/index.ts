@@ -1,6 +1,10 @@
 import express from "express";
 import { z } from "zod";
 
+import { prismaClient } from "./db";
+
+// We are doing just unit-testing here, so we r going to moc out the db therefore we r not migrating the prisma just yet
+
 export const app = express();
 app.use(express.json());
 
@@ -9,7 +13,7 @@ const sumInput = z.object({
     b: z.number(),
 });
 
-app.post('/sum', (req, res) => {
+app.post('/sum', async (req, res) => {
     const parsedResponse = sumInput.safeParse(req.body);
 
     if(!parsedResponse.success) {
@@ -19,9 +23,19 @@ app.post('/sum', (req, res) => {
         return ;
     }
 
-    const answer = parsedResponse.data.a + parsedResponse.data.b;
+    const result = parsedResponse.data.a + parsedResponse.data.b;
 
-    res.status(200).json(answer);
+    const request = await prismaClient.sum.create({
+    // If you r dependent on what the db returns u, then some exceptions can happen bcz. we r mocking out the whole thing
+    // So we need to mock out the thing and also mock out the return value as well
+        data: {
+            a: parsedResponse.data.a,
+            b: parsedResponse.data.b,
+            result: result,
+        }
+    });
+
+    res.json({ answer: result, id: request.id });
 });
 
 
@@ -44,8 +58,5 @@ app.get('/sum', (req, res) => {
 
     const answer = parsedResponse.data.a + parsedResponse.data.b;
 
-    res.json(answer);
-})
-
-
-// Todo -> How to handle query parameters in tests?
+    res.json({answer: answer});
+});
